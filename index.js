@@ -7,10 +7,10 @@
  */
 function createResponseObject(code, message) {
   return new Promise((resolve, reject) => {
-    console.debug(`createResponseObject() parameter(s):\n code = ${code}\n message = ${message}`);
+    console.debug(`createResponseObject() parameter(s):\n code = ${code}\n message = ${message}\n`);
 
     // Set default code
-    code = (code.length > 0) ? code : '200';
+    code = (code && code.length > 0) ? code : '200';
 
     // Create response object.
     let response = {
@@ -20,15 +20,15 @@ function createResponseObject(code, message) {
       }
     };
 
-    // If a message was supplied, add it to the response, otherwise empty object.
-    response.body = (message.length > 0)
-      ? JSON.stringify({ 'response': message })
-      : {};
 
-    console.debug('createResponseObject(): response =', JSON.stringify(response, null, 2));
+    // If a message was supplied, add it to the response, otherwise empty object.
+    response.body = (message && message.length > 0)
+    ? JSON.stringify({ 'response': message })
+    : {};
+
+    console.debug('createResponseObject(): response =', JSON.stringify(response, null, 2),'\n');
     return resolve(response);
   });
 }
 
-module.exports = createResponseObject;
-~
+exports = module.exports = createResponseObject;
