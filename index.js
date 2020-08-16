@@ -7,7 +7,7 @@
  */
 function createResponseObject(code, message) {
   return new Promise((resolve, reject) => {
-    console.debug(`createResponseObject() parameter(s):\n code = ${code}\n message = ${message}\n`);
+//    console.debug(`createResponseObject() parameter(s):\n code = ${code}\n message = ${message}\n`);
 
     // Set default code
     code = (code && code.length > 0) ? code : '200';
@@ -20,13 +20,12 @@ function createResponseObject(code, message) {
       }
     };
 
-
     // If a message was supplied, add it to the response, otherwise empty object.
-    response.body = (message && message.length > 0)
-    ? JSON.stringify({ 'response': message })
-    : {};
+    if(message && message.length > 0) {
+      response.body = JSON.stringify({ 'response': message });
+    }
 
-    console.debug('createResponseObject(): response =', JSON.stringify(response, null, 2),'\n');
+//    console.debug('createResponseObject(): response =', JSON.stringify(response, null, 2),'\n');
     return resolve(response);
   });
 }
