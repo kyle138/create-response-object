@@ -1,5 +1,5 @@
 # create-response-object
-NPM Module. A very, very tiny object creator for lambda-proxy responses. Right now I use it primarily for 200 an 400 responses with an optional message.
+NPM Module. A very, very tiny object creator for lambda-proxy responses. Right now I use it primarily for 200 and 400 responses with an optional message.
 
 ## Install
 npm install --save create-response-object
@@ -10,9 +10,9 @@ createResponseObject('200','Hello world!');
  ```
 
 #### Options
-* **code:** (optional) The HTTP status code to return. Defaults to '200'.
+* **code:** (optional) The HTTP status code to return. Defaults to '200'.  
    {string} '200', '400', etc.
-* **message:** (optional) The response body's message.
+* **message:** (optional) The response body's message.  
    {string} 'Hello World'.
 
 ## Example
