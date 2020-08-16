@@ -1,6 +1,6 @@
 {
   "name": "create-response-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A very, very tiny object creator for lambda-proxy resopnses.",
   "main": "index.js",
   "scripts": {
