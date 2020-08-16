@@ -37,4 +37,4 @@ Will output:
 ```
 
 ## Credit
-This function, as small as it is, draws inspiration from [jroberson](https://github.com/jroberson).
+This function, as small as it is, draws inspiration from [jroberson](https://github.com/jroberson){:target="_blank" rel="noopener"}.
