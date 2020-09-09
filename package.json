@@ -1,6 +1,6 @@
 {
   "name": "create-response-object",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A very, very tiny object creator for lambda-proxy resopnses.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,9 @@
     "response",
     "object",
     "200",
-    "400"
+    "400",
+    "301",
+    "302"
   ],
   "author": "Kyle138 (https://github.com/kyle138)",
   "license": "MIT",
