@@ -51,7 +51,7 @@ function createResponseObject(params) {
           // Set specified allowed headers or defaults.
           'Access-Control-Allow-Headers': (params.cors?.allowHeaders && params.cors.allowHeaders.length > 0) 
                                         ? params.cors.allowHeaders 
-                                        : 'Content-Type,X-Amz-Date,Authorization,X-Amz-Security-Token',
+                                        : 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
 
           // Set specified allowed methods or defaults.
           'Access-Control-Allow-Methods': (params.cors?.allowMethods && params.cors.allowMethods.length > 0)
