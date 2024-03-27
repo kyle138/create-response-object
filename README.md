@@ -6,35 +6,101 @@ npm install --save create-response-object
 
 ## Usage
 ```javascript
-createResponseObject('200','Hello world!');
+let params = {
+  code: '200',
+  message: 'Hello world!'
+};
+
+createResponseObject(params);
  ```
 
-#### Options
-* **code:** (optional) The HTTP status code to return. Defaults to '200'.  
-   {string} '200', '301', '302', '400', etc.
+#### Parameter Options  
+* **code:** (optional but recommended) The HTTP status code to return. Defaults to '200'.  
+   {string} '200', '301', '302', '400', etc  
+* **uri:** (required only for 301|302 codes) The redirect uri.  
 * **message:** (optional) The response body's message.  
-   {string} 'Hello World'.
-* **uri:** (required for 301|302) The redirect uri.
+   {string} 'Hello World!'  
+* **cors:** (optional) Adds CORS headers to the response.  
+  * **allowHeaders** (optional) List of allowed headers separated by comma.  
+    {string} Defaults to 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'  
+  * **allowOrigin** (optional) Origin to include in the CORS response.  
+    {string} Defaults to '*'  
+  * **allowMethods** (optional) List of allowed headers seperated by comma.  
+    {string} Defaults to '*'  
 
-## Example
+
+
+## Examples  
+### Import or require the module:  
 ```javascript
-const createResponseObject = require('create-response-object');
+import createResponseObject from 'create-response-object';           // ES Modulees import  
+const createResponseObject = require('create-response-object');      // CommonJS import  
+```
 
+### Return a plain 400 response:  
+```javascript
 exports.handler = async (event, context) => {
-  return await createResponseObject('200','Hello World!');
-  // or
-  // return await createResponseObject('400','Something went wrong!');
-  // or
-  // return await createResponseObject('301','','https://www.npmjs.com/package/create-response-object');
+  return await createResponseObject({
+    code: '400',
+    message: 'Something went wrong!'
+  });
+};
+```
+Will output:
+```javascript
+{
+    "statusCode": "400",
+    "body": "Something went wrong!",
+    "headers": {
+        "Content-Type": "application/json"
+    }
+}
+```
+
+### Return a 200 response with CORS headers:
+```javascript
+exports.handler = async (event, context) => {
+  return await createResponseObject({
+    code: '200',
+    message: 'Hello World!'
+    cors: {
+      allowHeaders: 'Content-Type',
+      allowOrigin: 'http://localhost:3000',
+      allowMethods: 'OPTIONS,GET'
+    }
+  });
 };
 ```
 Will output:
 ```javascript
 {
     "statusCode": "200",
+    "body": "Hello world!",
+    "headers": {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "OPTIONS,GET",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Content-Type": "application/json"
+    }
+}
+```
+
+### Return a 301 response with redirect:
+```javascript
+exports.handler = async (event, context) => {
+  return await createResponseObject({
+    code: '301',
+    uri: 'https://www.npmjs.com/package/create-response-object'
+  });
+};
+```
+Will output:
+```javascript
+{
+    "statusCode": "301",
     "body": "Hello World!",
     "headers": {
-        "Content-Type": "application/json"
+        "Location": "https://www.npmjs.com/package/create-response-object"
     }
 }
 ```
