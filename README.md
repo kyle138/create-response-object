@@ -62,7 +62,7 @@ Will output:
 exports.handler = async (event, context) => {
   return await createResponseObject({
     code: '200',
-    message: 'Hello World!'
+    message: 'Hello World!',
     cors: {
       allowHeaders: 'Content-Type',
       allowOrigin: 'http://localhost:3000',
